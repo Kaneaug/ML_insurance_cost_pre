@@ -36,3 +36,10 @@ plt.figure(figsize=(6,6))
 sns.distplot(df['bmi'])
 plt.title('BMI dist plot')
 plt.show()
+
+# Distribution of children
+
+plt.figure((6,6))
+sns.countplot(x='children', data=df)
+plt.title('Children')
+plt.show()
