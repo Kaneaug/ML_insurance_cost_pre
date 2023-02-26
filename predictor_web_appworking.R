@@ -1,5 +1,10 @@
 library(shiny)
 library(shinythemes)
+install.packages('rsconnect')
+rsconnect::setAccountInfo(name='kaneaug',
+                          token='B8DBE633A4B3BF9525998152ED8D0430',
+                          secret='55Vf87jFTSgVACHyldx6ULX10gP6Qqu+EtNb7sLP')
+library(rsconnect)
 
 # Load insurance dataset
 data <- read.csv("C:/Users/kanem/Documents/ML_insurance_cost_pre/data/insurance.csv")
@@ -93,3 +98,4 @@ server <- function(input, output) {
 
 # Run the app
 shinyApp(ui, server)
+

@@ -13,6 +13,7 @@ sns.set_theme(style="whitegrid")
 df = pd.read_csv(r'C:\Users\kanem\Documents\ML_insurance_cost_pre\data\insurance.csv')
 df.shape
 df.info
+df.columns
 df.describe()
 df
 
@@ -49,15 +50,23 @@ plt.title('Children')
 plt.show()
 
 #Dist of smokers 
+#df['smoker_label'] = df['smoker'].replace({0: 'Yes', 1: 'No'})
+#plt.figure(figsize=(8, 8))
+#sns.scatterplot(x='age', y='charges', data=df, hue='smoker_label', palette='Set1', alpha=0.8, s=80)
+#plt.title('Charges vs Age for Smokers and Non-Smokers', fontsize=16)
+#plt.xlabel('Age', fontsize=12)
+#plt.ylabel('Charges', fontsize=12)
+#plt.xticks(fontsize=10)
+#plt.yticks(fontsize=10)
+#plt.show()
 
-plt.figure(figsize=(8,8))
-sns.violinplot(x='smoker', y='charges', data=df, palette='Set2', inner='quartile', linewidth=1)
-plt.title('Distribution of Insurance Charges by Smoking Status', fontsize=14)
-plt.xlabel('Smoking Status', fontsize=12)
-plt.ylabel('Insurance Charges', fontsize=12)
-plt.xticks(fontsize=12)
-plt.yticks(fontsize=12)
-plt.tight_layout()
+plt.figure(figsize=(6,6))
+sns.barplot(x='smoker', y='smoker', data=df, estimator=lambda x: len(x)/len(df)*100)
+plt.title('Percentage of Smokers')
+plt.ylabel('Percentage of Population')
+plt.xlabel('Smoker Status')
+plt.xticks([0, 1], ['No', 'Yes'])
+plt.legend(title='Smoker', labels=['No', 'Yes'])
 plt.show()
 
 df['smoker'].value_counts()
@@ -74,8 +83,13 @@ df['region'].value_counts()
 #Dist of charges
 
 plt.figure(figsize=(8,8))
-sns.distplot(df['charges'])
-plt.title('Distribution of charges')
+sns.distplot(df['charges'], bins=30, color='purple')
+plt.title('Distribution of Insurance Charges', fontsize=16)
+plt.xlabel('Charges', fontsize=12)
+plt.ylabel('Density', fontsize=12)
+plt.xticks(fontsize=10)
+plt.yticks(fontsize=10)
+sns.despine()
 plt.show()
 
 # Encoding catagrical features
